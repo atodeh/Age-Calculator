@@ -1,5 +1,7 @@
 alert("This program is going to calculate your age based on your birthdate, and todays date.");
 
+var currentYear = new Date().getFullYear(); //current year from date object
+
 let birthMonth = -1; //used for loop below to ensure user enters proper month
 //converts birth month to # between 1-12, and then multiplies it by number of days in a month
 while (birthMonth < 0) {
@@ -32,7 +34,8 @@ todaysDay = calculateDayOfTheMonth(todaysDay, todaysDayMessage);
 the first parameter is for the day, while the second
 parameter is for birth day prompt vs current day prompt*/
 function calculateDayOfTheMonth(day, message) {
-	while (day < 1 || day > 31 || isNaN(day)) {
+	var flag = false; //to run loop until user enters valid number
+	while (!flag) {
 		day = Number(prompt(message));
 		if (day < 1 || day > 31 || isNaN(day)) {
 			alert("Please enter a valid number."); //only happens if user enters invalid number
@@ -50,9 +53,10 @@ todaysYear = calculateYear(todaysYear, todaysYearMessage);
 /*this function will calculate the year. The first parameter is for the year,
 while the second parameter is for birth year prompt vs current year prompt*/
 function calculateYear(year, message) {
-	while (year < 1 || year > 2021 || isNaN(year)) {
+	var flag = false; //to run loop until user enters valid number
+	while (!flag) {
 		year = Number(prompt(message));
-		if (year < 1 || year > 2021 || isNaN(year)) {
+		if (year < 1 || year > currentYear || isNaN(year)) {
 			alert("Please enter a valid year."); //only happens if user enters invalid year
 	} else {
 		return year;
@@ -64,8 +68,7 @@ const todaysYearInDays = (todaysYear * 365.25) + totalTodaysNumber; //convery to
 const ageYear = (todaysYearInDays - birthYearInDays) / 365.25; //age of user in years
 const ageMonth = (todaysYearInDays - birthYearInDays) / 30.5; //age of user in months
 const ageDay = (todaysYearInDays - birthYearInDays); //age of user in days
-
-alert(("You are " + Math.round(ageYear) + " years old!\n\n") +
+alert(("You are " + Math.trunc(ageYear) + " years old!\n\n") +
 ("In months, you are " + Math.round(ageMonth) + " months old!\n") +
 ("In days, you are " + Math.round(ageDay) + " days old!"));
 
